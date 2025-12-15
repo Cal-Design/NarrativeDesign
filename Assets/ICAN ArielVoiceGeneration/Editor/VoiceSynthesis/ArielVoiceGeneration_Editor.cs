@@ -99,7 +99,7 @@ namespace ArielVoiceGen
         public string newGlossaryPath = null;
 
         // API Key Option
-        public string ArielApiKey = "31c67b73-e452-467e-b3bc-68324176dba6";
+        public string ArielApiKey = "8b7a71b5-231f-4b8d-a565-4078884d3950";
 
         //End For Option
 
