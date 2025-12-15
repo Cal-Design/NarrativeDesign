@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ac9b4634d67ab2d49be416111b886355
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220646
+  packageName: Ariel Voice Generation
+  packageVersion: 1.5.1
+  assetPath: Assets/ArielVoiceGeneration/Third-Party Notices.txt
+  uploadId: 750811

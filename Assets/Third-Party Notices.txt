@@ -1,0 +1,1 @@
+Ariel Voice Generation asset uses the function SavWav that is an open source Third-Party component made by Calvin Rien. Permission is given for anyone to use this software for any purpose, including commercial applications (Cf : SavWav.cs license agreement notice)

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1e4175f5ad934624fb98c306cd838c1f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220646
+  packageName: Ariel Voice Generation
+  packageVersion: 1.5.1
+  assetPath: Assets/ArielVoiceGeneration/Editor/VoiceSynthesis/ArielVoiceRemote.cs
+  uploadId: 750811
