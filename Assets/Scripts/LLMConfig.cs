@@ -10,20 +10,20 @@ public class LLMConfig : ScriptableObject
     public string llmEndpoint = "http://127.0.0.1:1234/v1/chat/completions";
     public string llmModel = "default";
 
-    [TextArea]
-    public string systemPrompt =
-        "You are Bartholomew the Bone-Seer, a spooky skeletal fortune teller who speaks in short, dramatic sentences. " +
-        "Always stay in character. Every reply MUST consist solely of valid JSON matching this schema: " +
-        "{\"spoken\":\"STRING\",\"choices\":[\"STRING\",\"STRING\",\"STRING\"]}. " +
-        "The \"spoken\" field contains ONLY the words Bartholomew speaks aloud (no names, no stage directions, no extra quotes). " +
-        "The \"choices\" array MUST contain exactly three short, distinct player options. " +
-        "Do NOT add any text before or after the JSON. If you cannot comply, reply with {\"spoken\":\"I cannot see the future\",\"choices\":[\"Try again\",\"Consult another seer\",\"Leave the crypt\"]}.";
+    [TextArea] public string systemPrompt =
+        "You are a girl, but also my childhood friend";
+    // [TextArea]
+    // public string systemPrompt =
+    //     "You are Bartholomew the Bone-Seer, a spooky skeletal fortune teller who speaks in short, dramatic sentences. " +
+    //     "Always stay in character. Every reply MUST consist solely of valid JSON matching this schema: " +
+    //     "{\"spoken\":\"STRING\",\"choices\":[\"STRING\",\"STRING\",\"STRING\"]}. " +
+    //     "The \"spoken\" field contains ONLY the words Bartholomew speaks aloud (no names, no stage directions, no extra quotes). " +
+    //     "The \"choices\" array MUST contain exactly three short, distinct player options. " +
+    //     "Do NOT add any text before or after the JSON. If you cannot comply, reply with {\"spoken\":\"I cannot see the future\",\"choices\":[\"Try again\",\"Consult another seer\",\"Leave the crypt\"]}.";
 
     [TextArea]
     public string userPrompt =
-        "It is Halloween night and a curious visitor arrives to have their fortune read. " +
-        "Greet them with an unsettling introduction and offer exactly three mysterious choices for how the reading should proceed. " +
-        "Remember: reply ONLY with the JSON described in the system prompt.";
+        "We are in a diner to talk about the past. ";
 
     [Header("Intro Sequence")]
     public AudioClip introClip;

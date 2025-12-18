@@ -24,16 +24,18 @@ public class FortuneTellerController : MonoBehaviour
 {
     private const string ConfigResourcePath = "LLMConfig";
     private const string FormatInstructions =
-        "Respond ONLY with valid JSON. Format: {\"spoken\":\"...\",\"choices\":[\"...\",\"...\",\"...\"]}. " +
-        "\"spoken\" must contain only the words you will say aloud (no descriptive actions, no labels like 'Bartholomew:'). " +
-        "\"choices\" must be an array of exactly three short, distinct player options. Do not include any extra text before or after the JSON.";
+        "Respond ONLY with valid JSON. Format: {\"spoken\":\"...\",\"score\":<0-100>,\"insults\":true|false}. " +
+        "\"spoken\" must contain only the words you will say aloud (no descriptive actions, no labels). " +
+        "\"score\" must be an integer between 0 and 100 assessing the quality of the player's sentence (preferably expressed as a number). " +
+        "\"insults\" must be a boolean set to true if the player's sentence contains insults. Do not include any extra text outside the JSON.";
     private const string RetryReminder =
-        "That response was not valid JSON. Reply again using ONLY the schema {\"spoken\":\"...\",\"choices\":[\"...\",\"...\",\"...\"]} with exactly three choices.";
+        "That response was not valid JSON. Reply again using ONLY the schema {\"spoken\":\"...\",\"score\":<0-100>,\"insults\":true|false}.";
     private const int MaxRetries = 3;
 
     [SerializeField] private LLMConfig config;
     [SerializeField] private Text dialogueText;
-    [SerializeField] private Button[] choiceButtons;
+    [SerializeField] private InputField playerInputField;
+    [SerializeField] private Button submitButton;
     [SerializeField] private Animator talkingAnimator;
     [SerializeField] private string talkingParameter = "IsTalking";
     [SerializeField] private bool logResponses = false;
@@ -46,13 +48,11 @@ public class FortuneTellerController : MonoBehaviour
     private AudioSource _musicSource;
     private GameObject _uiRoot;
     private bool _uiHiddenByConfig;
-    private bool _choicesCurrentlyVisible;
-    private string[] _currentChoices = Array.Empty<string>();
     private string _voiceId = string.Empty;
     private string _apiKey = string.Empty;
     private bool _requestInFlight;
     private bool _awaitingIntroChoice;
-    private GameObject _choicesContainer;
+    private GameObject _inputContainer;
     private int _talkingParameterHash = -1;
 
     private void Awake()
@@ -68,7 +68,7 @@ public class FortuneTellerController : MonoBehaviour
         EnsureMusicSource();
 
         EnsureUI();
-        HookupButtons();
+        HookupInput();
     }
 
     private void Start()
@@ -84,9 +84,9 @@ public class FortuneTellerController : MonoBehaviour
             return;
         }
 
-        dialogueText.text = "hmmmm...";
-        SetChoicesInteractable(false);
-        SetChoicesVisible(false);
+        dialogueText.text = "The fortune teller prepares to speak...";
+        SetInputInteractable(false);
+        SetInputVisible(false);
 
         _voiceId = config.HasVoiceId ? config.elevenLabsVoiceId : Environment.GetEnvironmentVariable("ELEVENLABS_VOICE_ID");
         _apiKey = config.HasApiKey ? config.elevenLabsApiKey : Environment.GetEnvironmentVariable("ELEVENLABS_API_KEY");
@@ -122,12 +122,12 @@ public class FortuneTellerController : MonoBehaviour
 
         if (string.IsNullOrWhiteSpace(_voiceId))
         {
-            Debug.LogWarning("FortuneTellerController: ElevenLabs voice ID not set (config or ELEVENLABS_VOICE_ID). Choices will be shown but audio will be silent.");
+            Debug.LogWarning("FortuneTellerController: ElevenLabs voice ID not set (config or ELEVENLABS_VOICE_ID). Input will be shown but audio will be silent.");
         }
 
         if (string.IsNullOrWhiteSpace(_apiKey))
         {
-            Debug.LogWarning("FortuneTellerController: ElevenLabs API key not set (config or ELEVENLABS_API_KEY). Choices will be shown but audio will be silent.");
+            Debug.LogWarning("FortuneTellerController: ElevenLabs API key not set (config or ELEVENLABS_API_KEY). Input will be shown but audio will be silent.");
         }
 
         _conversation.Clear();
@@ -146,7 +146,7 @@ public class FortuneTellerController : MonoBehaviour
 
     private void EnsureUI()
     {
-        if (dialogueText != null && choiceButtons != null && choiceButtons.Length >= 3)
+        if (dialogueText != null && playerInputField != null && submitButton != null)
         {
             CacheUiRoot();
             if (EventSystem.current == null)
@@ -203,51 +203,50 @@ public class FortuneTellerController : MonoBehaviour
         textLayout.preferredHeight = 160f;
         textLayout.flexibleHeight = 1f;
 
-        var choicesContainer = CreateRectTransform("Choices", panel);
-        _choicesContainer = choicesContainer.gameObject;
-        var choicesLayout = choicesContainer.gameObject.AddComponent<VerticalLayoutGroup>();
-        choicesLayout.spacing = 8f;
-        choicesLayout.childAlignment = TextAnchor.UpperCenter;
-        choicesLayout.childControlWidth = true;
-        choicesLayout.childControlHeight = true;
-        choicesLayout.childForceExpandWidth = true;
-        choicesLayout.childForceExpandHeight = false;
+        var inputContainer = CreateRectTransform("InputContainer", panel);
+        _inputContainer = inputContainer.gameObject;
+        var inputLayout = inputContainer.gameObject.AddComponent<HorizontalLayoutGroup>();
+        inputLayout.spacing = 8f;
+        inputLayout.childAlignment = TextAnchor.MiddleCenter;
 
-        choiceButtons = new Button[3];
-        for (int i = 0; i < 3; i++)
-        {
-            var buttonGo = CreateRectTransform($"ChoiceButton{i + 1}", choicesContainer);
-            var image = buttonGo.gameObject.AddComponent<Image>();
-            image.color = new Color(0.23f, 0.18f, 0.33f, 0.85f);
-            image.raycastTarget = true;
+        var inputGo = CreateRectTransform("PlayerInput", inputContainer);
+        playerInputField = inputGo.gameObject.AddComponent<InputField>();
+        var inputImage = inputGo.gameObject.AddComponent<Image>();
+        inputImage.color = new Color(0.15f, 0.15f, 0.15f, 0.9f);
+        playerInputField.targetGraphic = inputImage;
+        playerInputField.textComponent = CreateTextForInput(inputGo.transform, 18, "");
 
-            var button = buttonGo.gameObject.AddComponent<Button>();
-            button.targetGraphic = image;
-            var colors = button.colors;
-            colors.normalColor = image.color;
-            colors.highlightedColor = new Color(0.35f, 0.28f, 0.48f, 0.95f);
-            colors.pressedColor = new Color(0.18f, 0.14f, 0.26f, 0.9f);
-            button.colors = colors;
+        var submitGo = CreateRectTransform("SubmitButton", inputContainer);
+        var submitImage = submitGo.gameObject.AddComponent<Image>();
+        submitImage.color = new Color(0.23f, 0.18f, 0.33f, 0.95f);
+        submitButton = submitGo.gameObject.AddComponent<Button>();
+        submitButton.targetGraphic = submitImage;
+        var subLabel = CreateTextForInput(submitGo.transform, 18, "Send");
+        var subLayout = submitGo.gameObject.AddComponent<LayoutElement>();
+        subLayout.minWidth = 120f;
 
-            var btLayout = buttonGo.gameObject.AddComponent<LayoutElement>();
-            btLayout.minHeight = 48f;
-            btLayout.preferredHeight = 52f;
-
-            var labelGo = CreateRectTransform("Text", buttonGo);
-            var label = labelGo.gameObject.AddComponent<Text>();
-            label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            label.fontSize = 20;
-            label.color = new Color(0.95f, 0.94f, 0.9f);
-            label.alignment = TextAnchor.MiddleCenter;
-            label.horizontalOverflow = HorizontalWrapMode.Wrap;
-            label.verticalOverflow = VerticalWrapMode.Truncate;
-            label.text = $"Choice {i + 1}";
-
-            choiceButtons[i] = button;
-        }
-
-        SetChoicesVisible(false);
+        SetInputVisible(false);
         CacheUiRoot();
+    }
+
+    private Text CreateTextForInput(Transform parent, int size, string text)
+    {
+        var labelGo = new GameObject("Text", typeof(RectTransform));
+        var rect = labelGo.GetComponent<RectTransform>();
+        rect.SetParent(parent, false);
+        rect.anchorMin = new Vector2(0, 0);
+        rect.anchorMax = new Vector2(1, 1);
+        rect.offsetMin = Vector2.zero;
+        rect.offsetMax = Vector2.zero;
+        var label = labelGo.AddComponent<Text>();
+        label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        label.fontSize = size;
+        label.color = new Color(0.95f, 0.94f, 0.9f);
+        label.alignment = TextAnchor.MiddleCenter;
+        label.horizontalOverflow = HorizontalWrapMode.Wrap;
+        label.verticalOverflow = VerticalWrapMode.Truncate;
+        label.text = text;
+        return label;
     }
 
     private void CreateEventSystem()
@@ -275,58 +274,75 @@ public class FortuneTellerController : MonoBehaviour
 
     private void HookupButtons()
     {
-        if (choiceButtons == null)
+        // legacy - replaced by input hookup
+    }
+
+    private void HookupInput()
+    {
+        if (submitButton != null)
         {
-            return;
+            submitButton.onClick.RemoveAllListeners();
+            submitButton.onClick.AddListener(OnSubmitButtonClicked);
         }
 
-        for (int i = 0; i < choiceButtons.Length; i++)
+        if (playerInputField != null)
         {
-            int index = i;
-            if (choiceButtons[i] == null)
-            {
-                continue;
-            }
-
-            choiceButtons[i].onClick.RemoveAllListeners();
-            choiceButtons[i].onClick.AddListener(() => OnChoiceSelected(index));
+            playerInputField.onEndEdit.RemoveAllListeners();
+            playerInputField.onEndEdit.AddListener(OnInputEndEdit);
         }
     }
 
-    private void OnChoiceSelected(int index)
+    private void OnSubmitButtonClicked()
     {
-        if (_requestInFlight || _currentChoices == null || index < 0 || index >= _currentChoices.Length)
+        if (playerInputField == null)
+        {
+            return;
+        }
+        OnSubmitInput(playerInputField.text);
+    }
+
+    private void OnInputEndEdit(string text)
+    {
+        if (WasSubmitKeyPressed())
+        {
+            OnSubmitInput(text);
+        }
+    }
+
+    private bool WasSubmitKeyPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter);
+    }
+
+    private void OnSubmitInput(string text)
+    {
+        if (_requestInFlight || string.IsNullOrWhiteSpace(text))
         {
             return;
         }
 
-        string choice = _currentChoices[index];
-        if (string.IsNullOrWhiteSpace(choice))
-        {
-            return;
-        }
+        var trimmed = text.Trim();
+        int playerScore = CalculatePlayerInputScore(trimmed);
+        bool playerHasInsults = DetectInsults(trimmed);
+
+        string scoreDisplay = $"Score: {playerScore} | Insults: {playerHasInsults}";
+        dialogueText.text = $"You: {trimmed}\n\n{scoreDisplay}\n\nThe fortune teller contemplates...";
+        SetInputInteractable(false);
+        AppendUserLine(trimmed);
+        playerInputField.text = string.Empty;
 
         if (_awaitingIntroChoice)
         {
             _awaitingIntroChoice = false;
-            dialogueText.text = $"You choose: {choice}\n\nThe fortune teller contemplates...";
-            SetChoicesInteractable(false);
-            SetChoicesVisible(false);
-
             string initialPrompt = string.IsNullOrWhiteSpace(config.userPrompt)
-                ? $"The visitor selects \"{choice}\". Continue the reading with eerie insight and present three options."
-                : $"{config.userPrompt}\nThe visitor selects \"{choice}\".";
+                ? $"The visitor says: \"{trimmed}\" (Quality score: {playerScore}/100, Contains insults: {playerHasInsults}). Continue the reading with eerie insight."
+                : $"{config.userPrompt}\nThe visitor says: \"{trimmed}\" (Quality score: {playerScore}/100, Contains insults: {playerHasInsults}).";
 
-            AppendUserLine(choice);
             StartCoroutine(AdvanceConversation(initialPrompt));
             return;
         }
 
-        dialogueText.text = $"You choose: {choice}\n\nThe fortune teller contemplates...";
-        SetChoicesInteractable(false);
-        SetChoicesVisible(false);
-        AppendUserLine(choice);
-        StartCoroutine(AdvanceConversation($"The visitor selects: \"{choice}\". React in character, reveal a new omen, and offer three new options."));
+        StartCoroutine(AdvanceConversation($"The visitor says: \"{trimmed}\" (Quality score: {playerScore}/100, Contains insults: {playerHasInsults}). React in character."));
     }
 
     private IEnumerator RunStartupSequence()
@@ -339,7 +355,7 @@ public class FortuneTellerController : MonoBehaviour
 
         if (HasIntroQuestion())
         {
-            SetChoicesVisible(false);
+            SetInputVisible(true);
             if (config.introQuestionClip != null)
             {
                 bool questionRecorded = false;
@@ -370,7 +386,7 @@ public class FortuneTellerController : MonoBehaviour
                 dialogueText.text = string.Empty;
             }
 
-            ApplyChoices(config.introChoices);
+            SetInputInteractable(true);
             _awaitingIntroChoice = true;
             yield break;
         }
@@ -392,7 +408,7 @@ public class FortuneTellerController : MonoBehaviour
             _conversation.Add(new ChatMessage { role = "user", content = userMessage });
         }
 
-        SetChoicesVisible(false);
+        SetInputVisible(false);
 
         int attempt = 0;
         FortuneResponse parsedResponse = null;
@@ -410,8 +426,8 @@ public class FortuneTellerController : MonoBehaviour
                     Debug.LogError($"FortuneTellerController: LLM request failed: {llmRequest.error}");
                     _requestInFlight = false;
                     SetTalkingState(false);
-                    SetChoicesVisible(true);
-                    SetChoicesInteractable(true);
+                    SetInputVisible(true);
+                    SetInputInteractable(true);
                     yield break;
                 }
 
@@ -437,8 +453,8 @@ public class FortuneTellerController : MonoBehaviour
                 Debug.LogError("FortuneTellerController: Failed to parse LLM response after multiple attempts.");
                 _requestInFlight = false;
                 SetTalkingState(false);
-                SetChoicesVisible(true);
-                SetChoicesInteractable(true);
+                SetInputVisible(true);
+                SetInputInteractable(true);
                 yield break;
             }
         }
@@ -456,69 +472,30 @@ public class FortuneTellerController : MonoBehaviour
             yield return PlaySpeech(spoken);
         }
 
-        ApplyChoices(parsedResponse.choices);
+        ApplyResponseMeta(parsedResponse);
         _requestInFlight = false;
     }
 
-    private void ApplyChoices(string[] choices)
+    private void ApplyResponseMeta(FortuneResponse parsedResponse)
     {
-        _currentChoices = NormalizeChoices(choices);
-        for (int i = 0; i < choiceButtons.Length; i++)
+        if (parsedResponse == null)
         {
-            var button = choiceButtons[i];
-            if (button == null)
-            {
-                continue;
-            }
-
-            string choice = i < _currentChoices.Length ? _currentChoices[i] : string.Empty;
-            bool hasChoice = !string.IsNullOrWhiteSpace(choice);
-            button.gameObject.SetActive(hasChoice);
-            button.interactable = hasChoice;
-
-            var label = button.GetComponentInChildren<Text>();
-            if (label != null)
-            {
-                label.text = hasChoice ? choice : "---";
-            }
+            SetInputVisible(true);
+            SetInputInteractable(true);
+            return;
         }
 
-        SetChoicesVisible(true);
-        SetChoicesInteractable(true);
+        // Show input again
+        SetInputVisible(true);
+        SetInputInteractable(true);
+        // Display only the LLM's spoken response (score/insults were already shown for player input)
+        if (!string.IsNullOrWhiteSpace(parsedResponse.spoken) && dialogueText != null)
+        {
+            dialogueText.text = parsedResponse.spoken;
+        }
     }
 
-    private string[] NormalizeChoices(string[] choices)
-    {
-        if (choices == null || choices.Length == 0)
-        {
-            return new[]
-            {
-                "Ask about the shadows", "Request a bone reading", "Politely take your leave"
-            };
-        }
-
-        var results = new List<string>(3);
-        foreach (var choice in choices)
-        {
-            if (results.Count >= 3)
-            {
-                break;
-            }
-
-            var cleaned = SanitizeTranscript(choice);
-            if (!string.IsNullOrWhiteSpace(cleaned) && !results.Contains(cleaned))
-            {
-                results.Add(cleaned);
-            }
-        }
-
-        while (results.Count < 3)
-        {
-            results.Add("Contemplate in silence");
-        }
-
-        return results.ToArray();
-    }
+    // Choices UI removed — input field is used instead.
 
     private bool HasIntroQuestion()
     {
@@ -834,7 +811,7 @@ public class FortuneTellerController : MonoBehaviour
             }
             parsedJson = json;
 
-            // Primary parse via JsonUtility
+            // Primary parse via JsonUtility into expected schema
             FortuneJson fortune = null;
             try
             {
@@ -850,7 +827,8 @@ public class FortuneTellerController : MonoBehaviour
                 response = new FortuneResponse
                 {
                     spoken = fortune.spoken,
-                    choices = fortune.choices ?? Array.Empty<string>()
+                    score = fortune.score,
+                    insults = fortune.insults
                 };
                 return true;
             }
@@ -877,24 +855,34 @@ public class FortuneTellerController : MonoBehaviour
 
             var spoken = SanitizeTranscript(spokenObj as string);
 
-            string[] choices = Array.Empty<string>();
-            if (obj.TryGetValue("choices", out var choicesObj) && choicesObj is IList list)
+            int score = 50;
+            if (obj.TryGetValue("score", out var scoreObj))
             {
-                var temp = new List<string>();
-                foreach (var item in list)
+                try
                 {
-                    if (item is string s && !string.IsNullOrWhiteSpace(s))
-                    {
-                        temp.Add(s);
-                    }
+                    if (scoreObj is long l) score = (int)l;
+                    else if (scoreObj is double d) score = (int)d;
+                    else if (scoreObj is string s && int.TryParse(s, out var si)) score = si;
                 }
-                choices = temp.ToArray();
+                catch { score = 50; }
+            }
+
+            bool insults = false;
+            if (obj.TryGetValue("insults", out var insultsObj))
+            {
+                try
+                {
+                    if (insultsObj is bool b) insults = b;
+                    else if (insultsObj is string ss && bool.TryParse(ss, out var bs)) insults = bs;
+                }
+                catch { insults = false; }
             }
 
             response = new FortuneResponse
             {
                 spoken = spoken,
-                choices = choices
+                score = Mathf.Clamp(score, 0, 100),
+                insults = insults
             };
             if (string.IsNullOrWhiteSpace(spoken))
             {
@@ -969,77 +957,37 @@ public class FortuneTellerController : MonoBehaviour
             return false;
         }
 
-        var lines = content.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
-        var choices = new List<string>();
-        int firstChoiceLineIndex = -1;
-        var choicePattern = new Regex(@"^\s*(?:\d+[\.\)]|\-\s|\*\s)(.+)$");
-
-        for (int i = 0; i < lines.Length; i++)
-        {
-            var match = choicePattern.Match(lines[i]);
-            if (match.Success)
-            {
-                if (firstChoiceLineIndex == -1)
-                {
-                    firstChoiceLineIndex = i;
-                }
-                var choiceText = SanitizeTranscript(match.Groups[1].Value);
-                if (!string.IsNullOrWhiteSpace(choiceText))
-                {
-                    choices.Add(choiceText);
-                }
-            }
-        }
-
-        if (choices.Count == 0)
+        // Fallback: treat the content as spoken text, synthesize a neutral score and detect insults heuristically.
+        var spoken = SanitizeTranscript(content);
+        if (string.IsNullOrWhiteSpace(spoken))
         {
             return false;
         }
 
-        while (choices.Count < 3)
-        {
-            choices.Add("Contemplate your fate in silence");
-        }
-
-        string spokenSection = content;
-        if (firstChoiceLineIndex > 0)
-        {
-            spokenSection = string.Join("\n", lines, 0, firstChoiceLineIndex);
-        }
-        spokenSection = SanitizeTranscript(spokenSection);
-
-        if (string.IsNullOrWhiteSpace(spokenSection))
-        {
-            spokenSection = "The fortune teller gestures for you to choose.";
-        }
+        int score = 50;
+        bool insults = DetectInsults(spoken);
 
         response = new FortuneResponse
         {
-            spoken = spokenSection,
-            choices = choices.ToArray()
+            spoken = spoken,
+            score = score,
+            insults = insults
         };
 
-        synthesizedJson = BuildJsonPayload(response.spoken, response.choices);
+        synthesizedJson = BuildJsonPayload(response.spoken, response.score, response.insults);
         return true;
     }
 
-    private string BuildJsonPayload(string spoken, string[] choices)
+    private string BuildJsonPayload(string spoken, int score, bool insults)
     {
         var sb = new StringBuilder();
         sb.Append("{\"spoken\":\"");
         sb.Append(EscapeForJson(spoken));
-        sb.Append("\",\"choices\":[");
-        for (int i = 0; i < choices.Length; i++)
-        {
-            if (i > 0)
-            {
-                sb.Append(',');
-            }
-            sb.Append('\"');
-            sb.Append(EscapeForJson(choices[i]));
-            sb.Append('\"');
-        }
-        sb.Append("]}");
+        sb.Append("\",\"score\":");
+        sb.Append(score);
+        sb.Append(",\"insults\":");
+        sb.Append(insults ? "true" : "false");
+        sb.Append('}');
         return sb.ToString();
     }
 
@@ -1055,6 +1003,55 @@ public class FortuneTellerController : MonoBehaviour
             .Replace("\"", "\\\"")
             .Replace("\n", "\\n")
             .Replace("\r", "\\r");
+    }
+
+    private bool DetectInsults(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return false;
+        var lower = text.ToLowerInvariant();
+        string[] badWords = new[] { "merde", "connard", "putain", "salope", "con", "pute", "encul", "fdp", "shit", "fuck", "idiot", "stupide" };
+        foreach (var w in badWords)
+        {
+            if (lower.Contains(w)) return true;
+        }
+        return false;
+    }
+
+    private int CalculatePlayerInputScore(string text)
+    {
+        if (string.IsNullOrWhiteSpace(text)) return 0;
+
+        int score = 50; // baseline
+
+        // Bonus for length (more thought = higher quality)
+        if (text.Length > 50) score += 15;
+        else if (text.Length > 30) score += 10;
+        else if (text.Length < 5) score -= 20;
+
+        // Bonus for French words (since this is targeted at French players)
+        var lowerText = text.ToLowerInvariant();
+        string[] frenchMarkers = new[] { "je ", "tu ", "il ", "elle ", "nous ", "vous ", "ils ", "elles ", "et ", "mais ", "donc ", "parce que ", "pourquoi", "comment", "quoi", "qui" };
+        int frenchCount = 0;
+        foreach (var marker in frenchMarkers)
+        {
+            if (lowerText.Contains(marker)) frenchCount++;
+        }
+        if (frenchCount >= 3) score += 20;
+        else if (frenchCount >= 1) score += 10;
+
+        // Penalty for insults
+        if (DetectInsults(text)) score -= 30;
+
+        // Penalty for excessive punctuation
+        int punctCount = 0;
+        foreach (char c in text)
+        {
+            if (c == '!' || c == '?') punctCount++;
+        }
+        if (punctCount > 3) score -= 10;
+
+        // Clamp to 0-100
+        return Mathf.Clamp(score, 0, 100);
     }
 
     private bool WasSkipPressed()
@@ -1139,28 +1136,23 @@ public class FortuneTellerController : MonoBehaviour
         }
     }
 
-    private void SetChoicesVisible(bool visible)
+    private void SetInputVisible(bool visible)
     {
-        _choicesCurrentlyVisible = visible;
-        if (_choicesContainer != null)
+        if (_inputContainer != null)
         {
-            _choicesContainer.SetActive(!_uiHiddenByConfig && visible);
+            _inputContainer.SetActive(!_uiHiddenByConfig && visible);
         }
     }
 
-    private void SetChoicesInteractable(bool value)
+    private void SetInputInteractable(bool value)
     {
-        if (choiceButtons == null)
+        if (playerInputField != null)
         {
-            return;
+            playerInputField.interactable = value && !_uiHiddenByConfig;
         }
-
-        foreach (var button in choiceButtons)
+        if (submitButton != null)
         {
-            if (button != null)
-            {
-                button.interactable = value && !_uiHiddenByConfig;
-            }
+            submitButton.interactable = value && !_uiHiddenByConfig;
         }
     }
 
@@ -1181,19 +1173,19 @@ public class FortuneTellerController : MonoBehaviour
             {
                 dialogueText.gameObject.SetActive(visible);
             }
-            if (_choicesContainer != null)
+            if (_inputContainer != null)
             {
-                _choicesContainer.SetActive(visible && _choicesCurrentlyVisible);
+                _inputContainer.SetActive(visible);
             }
         }
 
         if (!visible)
         {
-            SetChoicesInteractable(false);
+            SetInputInteractable(false);
         }
-        else if (_choicesContainer != null)
+        else if (_inputContainer != null)
         {
-            _choicesContainer.SetActive(_choicesCurrentlyVisible);
+            _inputContainer.SetActive(true);
         }
     }
 
@@ -1217,9 +1209,9 @@ public class FortuneTellerController : MonoBehaviour
             return;
         }
 
-        if (_choicesContainer != null)
+        if (_inputContainer != null)
         {
-            _uiRoot = _choicesContainer;
+            _uiRoot = _inputContainer;
         }
     }
 
@@ -1384,7 +1376,8 @@ public class FortuneTellerController : MonoBehaviour
     private class FortuneResponse
     {
         public string spoken;
-        public string[] choices;
+        public int score;
+        public bool insults;
     }
 
     [Serializable]
@@ -1409,7 +1402,8 @@ public class FortuneTellerController : MonoBehaviour
     private class FortuneJson
     {
         public string spoken;
-        public string[] choices;
+        public int score;
+        public bool insults;
     }
 
     [Serializable]
