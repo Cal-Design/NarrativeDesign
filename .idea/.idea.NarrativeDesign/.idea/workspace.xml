@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="551dee5f-5e11-4c05-b053-c179b35b1d39" name="Changes" comment="">
+    <list default="true" id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerBootstrapper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerBootstrapper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerController.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMIntroPlayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMIntroPlayer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/MiniJson.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/LLMS/MiniJson.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/FlavienProg.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FlavienProg.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GeminiRESTClient.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GeminiRESTClient.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.progrids/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.progrids/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,12 +32,58 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/04ea551b86be4bf89b6d0eb610608bdeac00/e5/9e482615/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/0554d188821a485d8f4d8d678b55c8301be00/1a/20b2c939/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/0ced2cd8682f4d5cbe9e73f44abd84701be00/61/ffdb04b6/02000003pdb12.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/0ced2cd8682f4d5cbe9e73f44abd84701be00/f6/a00a2b3a/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/02/1e586d67/02000007pdb16.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/45/5fb989c2/02000005pdb14.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/48/2722e5cb/02000003pdb12.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/4d/2cb8c936/02000004pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/73/bf565fba/0200000Cpdb19.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/207dff3418694a5aaf5ec236aef43aea13e00/c9/ea001983/02000006pdb15.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/2779094e75c5473ea0a783ed2720081d1bc00/38/74d86162/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/321407d99f004c2987b76d63c714d0271be00/25/8c0f73d0/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3b5a1e1320a8406eb13ac1d9ed292224ac00/ce/e8fb6ed8/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3f715a959d5b4d0e9f4ba6f1f9e9530fac00/1d/d5081df2/02000006pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/3f715a959d5b4d0e9f4ba6f1f9e9530fac00/71/9c537c6a/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/419e924631dc4fe4a04cd0a67ff7d240ac00/02/16130323/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/4ade6019bd284a87b79c93e2f1aa4a041bc00/c0/e8824ee9/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62039cf52df245f9adf571d489f6d7f117200/29/f005b272/02000003pdb12.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62039cf52df245f9adf571d489f6d7f117200/63/392ec6f4/02000003pdb22.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62039cf52df245f9adf571d489f6d7f117200/6b/55b542f2/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62039cf52df245f9adf571d489f6d7f117200/94/d72d632e/02000005pdb14.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62039cf52df245f9adf571d489f6d7f117200/f8/6fafc8ca/02000006pdb15.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/62707234060046da82a66376a615a0b4ac00/83/90569939/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/7929fc9e7e6047fe9e4173dedcfca62c13c00/0f/e7851e4e/0200000Bpdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/7929fc9e7e6047fe9e4173dedcfca62c13c00/cb/dfcc3dc1/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/7929fc9e7e6047fe9e4173dedcfca62c13c00/fa/4a3494d2/02000009pdb17.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/9ff6cca360724a61ab5a50469045b5c113c00/11/8947cf17/02000004pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/9ff6cca360724a61ab5a50469045b5c113c00/53/a1de386a/02000009pdb17.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/9ff6cca360724a61ab5a50469045b5c113c00/54/39f8acf6/0200000Cpdb19.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/9ff6cca360724a61ab5a50469045b5c113c00/67/4216f3b5/02000008pdb16.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/ab32a99c73904c45891b4124b7667804ac00/4f/957979bf/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/ab32a99c73904c45891b4124b7667804ac00/d3/70e6b2f0/02000007pdb14.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/ad51a2e8349f4df08ec6d50138431e5e17200/c6/a5372c46/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/b6f8966d9fc74a1d989eadd507261276ac00/29/acfe07c1/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/bbac7d367fb74143bb578ab6ff579dfc1be00/03/b041289b/02000003pdb12.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/bbac7d367fb74143bb578ab6ff579dfc1be00/61/740138e3/0200000Bpdb19.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/bbac7d367fb74143bb578ab6ff579dfc1be00/ec/0ca6f86f/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/bbd6e0f9faa84d239738f0ddc679c9961be00/5f/8cf198e2/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/c6d86b0118a7445990559cd4957af9fc13c00/ac/45413099/02000004pdb21.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/cdc32ba2eaee4aad92c7094b8b8d713cac00/35/d9cce06c/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/ce142093ab734a18a01810715a354a8b1bc00/98/c7351f55/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/de1d1c20a6d044d9ab95ac477babe8111bc00/65/da3df135/0200000Apdb18.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/ecb4827d408942c1ad649d7e48883972ac00/12/7b1a8146/02000005pdb13.il" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CrushBootstrapper.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CrushController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@27299721f2fd/Runtime/TMP/TextMeshProUGUI.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="36vEVg6XrBJkulC6mpDI2R8x1en" />
+  <component name="ProjectId" id="371IS4josskM1rrEFOwcWyUTFlt" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -38,12 +93,14 @@
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;ml.llm.LLMConfigurable&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -53,10 +110,8 @@
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
@@ -65,25 +120,9 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
-      <option name="allowRunningInParallel" value="false" />
-      <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
-      <option name="projectPathOnTarget" />
-      <option name="runtimes">
-        <list />
-      </option>
-      <option name="selectedOptions">
-        <list />
-      </option>
-      <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
     <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
@@ -100,20 +139,20 @@
       <option name="useMixedMode" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Device" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
+    <configuration name="Attach to" type="UnityDevicePlayer" factoryName="UnityAttachToDevicePlayer">
       <method v="2" />
     </configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="551dee5f-5e11-4c05-b053-c179b35b1d39" name="Changes" comment="" />
-      <created>1765878671613</created>
+      <changelist id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="" />
+      <created>1766064148668</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1765878671613</updated>
-      <workItem from="1765879375306" duration="9564000" />
-      <workItem from="1765962161196" duration="4220000" />
-      <workItem from="1765970649416" duration="61000" />
+      <updated>1766064148668</updated>
+      <workItem from="1766064151662" duration="10025000" />
+      <workItem from="1766097081488" duration="782000" />
+      <workItem from="1766100540877" duration="701000" />
     </task>
     <servers />
   </component>
@@ -122,6 +161,7 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
+    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>
@@ -146,5 +186,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
