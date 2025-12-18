@@ -84,7 +84,7 @@ public class FortuneTellerController : MonoBehaviour
             return;
         }
 
-        dialogueText.text = "The fortune teller prepares to speak...";
+        dialogueText.text = "hmmmm...";
         SetChoicesInteractable(false);
         SetChoicesVisible(false);
 
