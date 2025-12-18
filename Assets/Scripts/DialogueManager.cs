@@ -2,12 +2,10 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    GeminiRESTClient restClient;
     public DialoguePanel[] DialoguePanels;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        restClient.SendPrompt("What is the name of the gameAward winner this year ?");
         //DialogueStart()
     }
 
