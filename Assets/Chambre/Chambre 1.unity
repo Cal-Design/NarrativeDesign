@@ -2985,6 +2985,103 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e8b9c21cf459b3d4eaef09ff9d8f9920, type: 3}
+--- !u!1001 &1278526459
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.731
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.038
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.754
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.41758713
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9086369
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 490.635
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4463895010634113322, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ac0979aadbdc934384201fe0b4bbac0, type: 2}
+    - target: {fileID: 919132149155446097, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: m_Name
+      value: MusicBox_Model (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5887580252140218282, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ac0979aadbdc934384201fe0b4bbac0, type: 2}
+    - target: {fileID: 6400878111623687671, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ac0979aadbdc934384201fe0b4bbac0, type: 2}
+    - target: {fileID: 7202271454713460447, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e6545829810aadf42a5d6c7a836a5cd2, type: 2}
+    - target: {fileID: 7418098771544918504, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ac0979aadbdc934384201fe0b4bbac0, type: 2}
+    - target: {fileID: 8032750206264916975, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ac0979aadbdc934384201fe0b4bbac0, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20cbcff2f7e467d4d9ac8fb0b156b324, type: 3}
 --- !u!1001 &1302686317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8667,8 +8764,8 @@ MonoBehaviour:
   interactionPanel: {fileID: 723683016}
   interactionText: {fileID: 1409862344}
   promptText: Appuyez sur E pour observer l'objet
-  contentText: "Une console toute neuve. \xC7a m'a tout l'air d'une arnaque mais
-    au moins il y a plein de jeux dessus.\n\n \"Elle m'invitait souvent pour me montrer
+  contentText: "Une console toute neuve. \xC7a a tout l'air d'une arnaque mais au
+    moins il y a plein de jeux dessus.\n\n \"Elle m'invitait souvent pour me montrer
     tous ses jeux. Elle disait que c'\xE9tait le meilleure moyen de penser \xE0 autre
     chose qu'\xE0 ses probl\xE8mes de famille.\""
 --- !u!65 &1627726773
@@ -20007,6 +20104,7 @@ SceneRoots:
   - {fileID: 1019229235}
   - {fileID: 1489913895}
   - {fileID: 138205651}
+  - {fileID: 1278526459}
   - {fileID: 902701201}
   - {fileID: 1808531973}
   - {fileID: 1864876618}
