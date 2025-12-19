@@ -24,13 +24,15 @@ public class FortuneTellerController : MonoBehaviour
 {
     private const string ConfigResourcePath = "LLMConfig";
     private const string FormatInstructions =
-        "Respond ONLY with valid JSON. Format: {\"spoken\":\"...\",\"score\":<0-100>,\"insults\":true|false}. " +
+        "Respond ONLY with valid JSON. Format: {\"spoken\":\"...\",\"emotion\":\"neutral|smile|happy|sad|angry\",\"score\":<0-100>,\"insults\":true|false}. " +
         "\"spoken\" must contain only the words you will say aloud (no descriptive actions, no labels). " +
+        "\"emotion\" must be one of: neutral, smile, happy, sad, angry - choose the emotion that best fits your response. " +
         "\"score\" must be an integer between 0 and 100 assessing the quality of the player's sentence (preferably expressed as a number). " +
         "\"insults\" must be a boolean set to true if the player's sentence contains insults. Do not include any extra text outside the JSON.";
     private const string RetryReminder =
-        "That response was not valid JSON. Reply again using ONLY the schema {\"spoken\":\"...\",\"score\":<0-100>,\"insults\":true|false}.";
+        "That response was not valid JSON. Reply again using ONLY the schema {\"spoken\":\"...\",\"emotion\":\"neutral|smile|happy|sad|angry\",\"score\":<0-100>,\"insults\":true|false}.";
     private const int MaxRetries = 3;
+    private static readonly string[] ValidEmotions = { "neutral", "smile", "happy", "sad", "angry" };
 
     [SerializeField] private LLMConfig config;
     [SerializeField] private Text dialogueText;
@@ -40,6 +42,12 @@ public class FortuneTellerController : MonoBehaviour
     [SerializeField] private string talkingParameter = "IsTalking";
     [SerializeField] private bool logResponses = false;
     [SerializeField] private KeyCode skipKey = KeyCode.Space;
+    [SerializeField] private Image characterSpriteDisplay;
+    [SerializeField] private Sprite neutralSprite;
+    [SerializeField] private Sprite smileSprite;
+    [SerializeField] private Sprite happySprite;
+    [SerializeField] private Sprite sadSprite;
+    [SerializeField] private Sprite angrySprite;
 
     private readonly List<ChatMessage> _conversation = new();
     private readonly Regex _actionMarkupRegex = new(@"\*[^*]+\*|\[[^\]]+\]|\([^\)]+\)", RegexOptions.Compiled);
@@ -485,6 +493,9 @@ public class FortuneTellerController : MonoBehaviour
             return;
         }
 
+        // Update SpriteData emotion number based on LLM emotion
+        UpdateCharacterSprite(parsedResponse.emotion);
+
         // Show input again
         SetInputVisible(true);
         SetInputInteractable(true);
@@ -493,6 +504,62 @@ public class FortuneTellerController : MonoBehaviour
         {
             dialogueText.text = parsedResponse.spoken;
         }
+    }
+
+    private void UpdateCharacterSprite(string emotion)
+    {
+        // Map normalized emotion string to SpriteData.EmotionNumber
+        string normalizedEmotion = NormalizeEmotion(emotion);
+        int emotionNumber = normalizedEmotion switch
+        {
+            "angry" => 0,
+            "sad" => 1,
+            "neutral" => 2,
+            "smile" => 3,
+            "happy" => 4,
+            _ => 2
+        };
+
+        var spriteData = Resources.Load<SpriteData>("SpriteData");
+        if (spriteData == null)
+        {
+            if (logResponses)
+            {
+                Debug.LogWarning("FortuneTellerController: Could not find SpriteData at Resources/SpriteData.");
+            }
+            return;
+        }
+
+        try
+        {
+            spriteData.EmotionNumber = emotionNumber;
+        }
+        catch (Exception ex)
+        {
+            if (logResponses)
+            {
+                Debug.LogWarning($"FortuneTellerController: Failed to set EmotionNumber on SpriteData: {ex.Message}");
+            }
+        }
+    }
+
+    private string NormalizeEmotion(string emotion)
+    {
+        if (string.IsNullOrWhiteSpace(emotion))
+        {
+            return "neutral";
+        }
+
+        string lower = emotion.ToLowerInvariant().Trim();
+        foreach (var validEmotion in ValidEmotions)
+        {
+            if (lower == validEmotion)
+            {
+                return validEmotion;
+            }
+        }
+
+        return "neutral";
     }
 
     // Choices UI removed — input field is used instead.
@@ -827,6 +894,7 @@ public class FortuneTellerController : MonoBehaviour
                 response = new FortuneResponse
                 {
                     spoken = fortune.spoken,
+                    emotion = NormalizeEmotion(fortune.emotion),
                     score = fortune.score,
                     insults = fortune.insults
                 };
@@ -855,6 +923,12 @@ public class FortuneTellerController : MonoBehaviour
 
             var spoken = SanitizeTranscript(spokenObj as string);
 
+            string emotion = "neutral";
+            if (obj.TryGetValue("emotion", out var emotionObj))
+            {
+                emotion = NormalizeEmotion(emotionObj as string);
+            }
+
             int score = 50;
             if (obj.TryGetValue("score", out var scoreObj))
             {
@@ -881,6 +955,7 @@ public class FortuneTellerController : MonoBehaviour
             response = new FortuneResponse
             {
                 spoken = spoken,
+                emotion = emotion,
                 score = Mathf.Clamp(score, 0, 100),
                 insults = insults
             };
@@ -970,19 +1045,22 @@ public class FortuneTellerController : MonoBehaviour
         response = new FortuneResponse
         {
             spoken = spoken,
+            emotion = "neutral",
             score = score,
             insults = insults
         };
 
-        synthesizedJson = BuildJsonPayload(response.spoken, response.score, response.insults);
+        synthesizedJson = BuildJsonPayload(response.spoken, response.emotion, response.score, response.insults);
         return true;
     }
 
-    private string BuildJsonPayload(string spoken, int score, bool insults)
+    private string BuildJsonPayload(string spoken, string emotion, int score, bool insults)
     {
         var sb = new StringBuilder();
         sb.Append("{\"spoken\":\"");
         sb.Append(EscapeForJson(spoken));
+        sb.Append("\",\"emotion\":\"");
+        sb.Append(NormalizeEmotion(emotion));
         sb.Append("\",\"score\":");
         sb.Append(score);
         sb.Append(",\"insults\":");
@@ -1376,6 +1454,7 @@ public class FortuneTellerController : MonoBehaviour
     private class FortuneResponse
     {
         public string spoken;
+        public string emotion;
         public int score;
         public bool insults;
     }
@@ -1402,6 +1481,7 @@ public class FortuneTellerController : MonoBehaviour
     private class FortuneJson
     {
         public string spoken;
+        public string emotion;
         public int score;
         public bool insults;
     }
