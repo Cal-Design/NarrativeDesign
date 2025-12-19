@@ -48,6 +48,7 @@ public class FortuneTellerController : MonoBehaviour
     [SerializeField] private Sprite happySprite;
     [SerializeField] private Sprite sadSprite;
     [SerializeField] private Sprite angrySprite;
+    private GameObject canvasGo;
 
     private readonly List<ChatMessage> _conversation = new();
     private readonly Regex _actionMarkupRegex = new(@"\*[^*]+\*|\[[^\]]+\]|\([^\)]+\)", RegexOptions.Compiled);
@@ -77,6 +78,26 @@ public class FortuneTellerController : MonoBehaviour
 
         EnsureUI();
         HookupInput();
+    }
+
+    private void Update()
+    {
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                canvasGo.SetActive(true);
+            }
+
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                canvasGo.SetActive(false);
+            }
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                canvasGo.SetActive(false);
+            }
+        }
     }
 
     private void Start()
@@ -169,7 +190,7 @@ public class FortuneTellerController : MonoBehaviour
             CreateEventSystem();
         }
 
-        var canvasGo = new GameObject("FortuneTellerCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
+        canvasGo = new GameObject("FortuneTellerCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         DontDestroyOnLoad(canvasGo);
         _uiRoot = canvasGo;
 
