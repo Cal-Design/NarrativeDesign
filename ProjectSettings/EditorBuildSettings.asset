@@ -4,7 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Template.unity
+    guid: 29324c4c43fa9ff4d8dcc97b4858606c
+  - enabled: 1
+    path: Assets/Chambre/Chambre.unity
+    guid: fced13d6a580fcf4d9b0e1d8ade959cd
+  - enabled: 1
+    path: Assets/Chambre/Chambre 2.unity
+    guid: 28fdab605a9ae3a48b68e9245ca91224
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -82,21 +82,20 @@ public class FortuneTellerController : MonoBehaviour
 
     private void Update()
     {
-        void Update()
+        if (Input.GetKeyDown(KeyCode.Keypad0))
         {
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                canvasGo.SetActive(true);
-            }
-
-            if (Input.GetKeyDown(KeyCode.U))
-            {
-                canvasGo.SetActive(false);
-            }
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                canvasGo.SetActive(false);
-            }
+            _uiRoot.SetActive(true);
+            //ApplyUiVisibility(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            _uiRoot.SetActive(false);
+            //ApplyUiVisibility(false);
+        }
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            _uiRoot.SetActive(false);
+            //ApplyUiVisibility(false);
         }
     }
 
@@ -113,7 +112,7 @@ public class FortuneTellerController : MonoBehaviour
             return;
         }
 
-        dialogueText.text = "The fortune teller prepares to speak...";
+        dialogueText.text = "Elise réfléchit...";
         SetInputInteractable(false);
         SetInputVisible(false);
 
@@ -354,8 +353,9 @@ public class FortuneTellerController : MonoBehaviour
         int playerScore = CalculatePlayerInputScore(trimmed);
         bool playerHasInsults = DetectInsults(trimmed);
 
-        string scoreDisplay = $"Score: {playerScore} | Insults: {playerHasInsults}";
-        dialogueText.text = $"You: {trimmed}\n\n{scoreDisplay}\n\nThe fortune teller contemplates...";
+        //string scoreDisplay = $"Score: {playerScore} | Insults: {playerHasInsults}";
+        string scoreDisplay = $"";
+        dialogueText.text = $"Moi: {trimmed}\n\n{scoreDisplay}\n\nElise réfléchit...";
         SetInputInteractable(false);
         AppendUserLine(trimmed);
         playerInputField.text = string.Empty;

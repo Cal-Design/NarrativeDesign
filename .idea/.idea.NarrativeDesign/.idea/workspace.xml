@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chambre/Chambre 1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chambre/Chambre 1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Chambre/Chambre 2.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Chambre/Chambre 2.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ICAN ArielVoiceGeneration/LiveVoiceGen.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/ICAN ArielVoiceGeneration/LiveVoiceGen.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ChangeScene.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ChangeScene.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/FortuneTellerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FortuneTellerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,8 +99,18 @@
   }
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
+      <option name="EXE_PATH" value="$USER_HOME$/Desktop/BuildNarrativeDesign\NarrativeDesign.exe" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="C:\Users\Cal\Desktop\BuildNarrativeDesign" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="ENV_FILE_PATHS" value="" />
+      <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="MIXED_MODE_DEBUG" value="0" />
+      <method v="2" />
+    </configuration>
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\logiciels\unity\Unity Editor\6000.0.60f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -102,7 +120,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Unit Tests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\logiciels\unity\Unity Editor\6000.0.60f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.60f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -156,6 +174,8 @@
       <workItem from="1766135835720" duration="13000" />
       <workItem from="1766147834236" duration="18000" />
       <workItem from="1766147877565" duration="93000" />
+      <workItem from="1766153601741" duration="2291000" />
+      <workItem from="1766156882247" duration="1721000" />
     </task>
     <servers />
   </component>
