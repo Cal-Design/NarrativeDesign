@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Raycast.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Raycast.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/FortuneTellerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/FortuneTellerController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,10 +96,8 @@
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
@@ -107,10 +106,8 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
-      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
-      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>

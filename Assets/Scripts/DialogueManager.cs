@@ -25,7 +25,6 @@ public class DialogueManager : MonoBehaviour
 {
     public TMP_Text Output;
     public TMP_InputField Prompt;
-    public DialoguePanel[] DialoguePanels;
     public int DialogueNumber = 0;
     
     ////////
@@ -83,7 +82,6 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         Prompt.interactable = false;
-        DialogueStart();
         ///////
         if (config == null)
         {
@@ -154,42 +152,6 @@ public class DialogueManager : MonoBehaviour
         ApplyUiVisibility(config != null && !config.hideDialogueUI);
 
         StartCoroutine(RunStartupSequence());
-    }
-    public void Update()
-    {
-        if (Input.GetKeyDown("space") && (DialogueNumber < DialoguePanels.Length))
-        {
-            if (!Prompt.interactable || Prompt.interactable && Prompt.text != "") //Prevent next if input empty
-            {
-                if (Prompt.text != "")
-                {
-                    //Send IA Request
-                    //Show animation or dialogue to fill the blanc
-                    //Only when ready:
-                    DialogueNext(DialoguePanels[DialogueNumber]);
-                }
-                DialogueNext(DialoguePanels[DialogueNumber]);
-            }
-        }
-    }
-    public void DialogueStart()
-    {
-        DialogueNext(DialoguePanels[DialogueNumber]);
-    }
-
-    public void DialogueNext(DialoguePanel dialoguePanel)
-    {
-        Output.text = DialoguePanels[DialogueNumber].Text;
-        //Debug.Log("Dialogue number "+DialogueNumber);
-        if (dialoguePanel.ShowPrompt) //Show Prompt when input required
-        {
-            Prompt.interactable = true;
-        }
-        else
-        {
-            Prompt.interactable = false;
-        }
-        DialogueNumber++;
     }
 
     private void EnsureUI()
@@ -1475,29 +1437,4 @@ public class DialogueManager : MonoBehaviour
         public float stability;
         public float similarity_boost;
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-/// <summary>
-/// /////////////////////////////////////:
-/// </summary>
-
-[System.Serializable]
-public class DialoguePanel
-{
-    public string Text;
-    public string VoiceToPlay;
-    public bool ShowPrompt;
-    public string PreloadThisScene;
-    public bool SwapController;
 }
