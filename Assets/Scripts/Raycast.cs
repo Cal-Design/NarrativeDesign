@@ -3,7 +3,7 @@ using UnityEngine;
 public class InteractionRaycast : MonoBehaviour
 {
     [Header("Raycast")]
-    public float interactionDistance = 4f;
+    public float interactionDistance = 10f;
     public LayerMask interactableLayer;
 
     private Outline currentOutline;
