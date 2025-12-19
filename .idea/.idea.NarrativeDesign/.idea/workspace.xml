@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.NarrativeDesign/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerBootstrapper.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerBootstrapper.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/FortuneTellerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMConfig.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMConfig.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMIntroPlayer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/LLMIntroPlayer.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/MiniJson.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/LLMS/MiniJson.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/LLMConfig.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/FlavienProg.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/FlavienProg.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DialogueManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.progrids/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.progrids/Settings.json" afterDir="false" />
-    </list>
+    <list default="true" id="21efbad6-5295-4941-ac21-b0c9067429d0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -110,8 +92,10 @@
       <option name="PROGRAM_PARAMETERS" value="-projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
@@ -120,8 +104,10 @@
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath C:\Users\Cal\UnityProjectC\NarrativeDesign -testResults Logs/results.xml -logFile Logs/Editor.log -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="C:\Users\Cal\UnityProjectC\NarrativeDesign" />
       <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="ENV_FILE_PATHS" value="" />
       <option name="REDIRECT_INPUT_PATH" value="" />
+      <option name="PTY_MODE" value="Auto" />
       <option name="MIXED_MODE_DEBUG" value="0" />
       <method v="2" />
     </configuration>
@@ -153,6 +139,7 @@
       <workItem from="1766064151662" duration="10025000" />
       <workItem from="1766097081488" duration="782000" />
       <workItem from="1766100540877" duration="701000" />
+      <workItem from="1766135835720" duration="13000" />
     </task>
     <servers />
   </component>
@@ -161,7 +148,6 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>
